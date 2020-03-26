@@ -155,12 +155,14 @@ class MainWindow(qtw.QWidget):
             self.event_list.addItem(f"{time}: {event['title']}")
 
     def populate_form(self):
+        self.populate_list()
         self.clear_form()
         date = self.calendar.selectedDate()
-        event_number = self.event_list.currentRow()
-        if event_number == -1:
+        event_count = self.event_list.count()
+        if event_count == 0:
             return
-
+        
+        event_number = self.event_list.currentRow()
         event_data = self.events.get(date)[event_number]
 
         self.event_category.setCurrentText(event_data['category'])
